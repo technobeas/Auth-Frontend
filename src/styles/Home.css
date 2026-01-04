@@ -1,0 +1,19 @@
+.home {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.home h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.home p {
+  color: #555;
+  max-width: 400px;
+}
