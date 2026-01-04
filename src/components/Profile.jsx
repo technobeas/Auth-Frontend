@@ -3,27 +3,36 @@ import "../styles/Profile.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Profile() {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(null);
 
-
   const token = JSON.parse(localStorage.getItem("token"));
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("/user/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        // const res = await axios.get("/user/profile", {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // });
+
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/user/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setUser(res.data.user.name);
         setEmail(res.data.user.email);
-        console.log("res: " ,res)
+        console.log("res: ", res);
       } catch (err) {
         console.error(err.response?.data || err.message);
       } finally {
@@ -32,9 +41,7 @@ export default function Profile() {
     };
 
     fetchProfile();
-
   }, [token]);
-
 
   if (loading) return <p>Loading profile...</p>;
 
